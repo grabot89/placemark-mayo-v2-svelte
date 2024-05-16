@@ -1,5 +1,3 @@
-{{> welcome-menu}}
-
 <section class="hero is-fullheight is-default is-bold">
   <div class="hero-head"></div>
   <div class="hero-body">
@@ -7,13 +5,13 @@
       <div class="columns is-vcentered">
         <div class="column is-5">
           <figure class="image">
-            <img class="object-fit" src="/images/mayo-coastline.jpg" alt="mayo-coastline" />
+            <img class="object-fit" src="/mayo-coastline.jpg" alt="mayo" />
           </figure>
         </div>
         <div class="column is-6 is-offset-1">
           <h1 class="title is-2 mb-5">
             <span class="icon mr-5"><i class="fas fa-map-marker-alt"></i></span><span class="icon mr-4"><i class="fas fa-vote-yea"></i></span>
-            <p>Placemark-Mayo</p>
+            <p>Placemark</p>
           </h1>
           <h2 class="subtitle is-4 mt-2">Sign up or log in to start magical Mayo moments</h2>
           <p class="has-text-centered">

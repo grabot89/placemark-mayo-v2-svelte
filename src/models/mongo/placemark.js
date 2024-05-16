@@ -6,8 +6,9 @@ const placemarkSchema = new Schema({
   name: String,
   category: String,
   description: String,
-  latitude: {type: Mongoose.Types.Decimal128},
-  longitude: {type: Mongoose.Types.Decimal128},
+  image: String,
+  latitude: { type: Number },
+  longitude: { type: Number },
   temperature: Number,
   categoryid: {
     type: Schema.Types.ObjectId,

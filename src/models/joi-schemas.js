@@ -6,6 +6,7 @@ export const UserCredentialsSpec = Joi.object()
   .keys({
     email: Joi.string().email().example("homer@simpson.com").required(),
     password: Joi.string().example("secret").required(),
+    admin: Joi.boolean().example(false).default(false),
   })
   .label("UserCredentials");
                                                                                 
@@ -45,6 +46,7 @@ export const CategorySpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Mountains"),
     userid: IdSpec,
+    img: Joi.string().optional(),
     placemarks: PlacemarkArraySpec,
   })
   .label("Category");
