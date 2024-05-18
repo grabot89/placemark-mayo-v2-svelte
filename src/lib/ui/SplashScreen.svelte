@@ -15,7 +15,7 @@
           </h1>
           <h2 class="subtitle is-4 mt-2">Sign up or log in to start magical Mayo moments</h2>
           <p class="has-text-centered">
-            <a class="button is-medium is-success" href="/signup">
+            <a data-sveltekit-preload-data="tap" class="button is-medium is-success" href="/signup">
               <span class="icon"><i class="fas fa-plus"></i></span><span>Sign Up</span>
             </a>
             <a class="button is-medium is-link" href="/login">

@@ -9,15 +9,15 @@ export interface Session {
     lastName: string;
     email: string;
     password: string;
-    admin: Boolean;
+    admin: boolean;
     _id?: string;
   }
 
   export interface Category {
-    title: string;
-    img: string;
-    placemarks: Placemark[]
-    _id: string;
+    name: string;
+    //img: string;
+    //placemarks: Placemark[]
+    _id?: string;
   }
   
   export interface Placemark {
@@ -27,8 +27,9 @@ export interface Session {
     image: string;
     latitude: number;
     longitude: number;
+    user: User | string;
     temperature: number;
-    _id: string;
+    _id?: string;
   }
 
   export interface DataSet {

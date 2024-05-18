@@ -1,13 +1,14 @@
-import axios from "axios";
 import type { Session, User, Placemark, Category } from "$lib/types/placemark-types";
+import { userStore } from "$lib/models/mongo/user-store";
+import { placemarkStore } from "$lib/models/mongo/placemark-store";
+import { categoryStore } from "$lib/models/mongo/category-store";
 
 export const placemarkService = {
-  baseUrl: "http://localhost:3000",
 
   async signup(user: User): Promise<boolean> {
     try {
-      const response = await axios.post(`${this.baseUrl}/api/users`, user);
-      return response.data.success === true;
+      const newUser = await userStore.add(user);
+      return !!newUser;
     } catch (error) {
       console.log(error);
       return false;
@@ -16,13 +17,12 @@ export const placemarkService = {
 
   async login(email: string, password: string): Promise<Session | null> {
     try {
-      const response = await axios.post(`${this.baseUrl}/api/users/authenticate`, { email, password });
-      if (response.data.success) {
-        axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
-        const session: Session = {
-          name: response.data.name,
-          token: response.data.token,
-          _id: response.data._id
+      const user = await userStore.findBy(email);
+      if (user !== null && user.password === password) {
+        const session = {
+          name: `${user.firstName} ${user.lastName}`,
+          token: user._id!.toString(),
+          _id: user._id!.toString()
         };
         return session;
       }
@@ -33,43 +33,57 @@ export const placemarkService = {
     }
   },
 
-  async createPlacemark(placemark: Placemark, session: Session) {
+  async createPlacemark(placemark: Placemark) {
     try {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
-      const response = await axios.post(this.baseUrl + "/api/categories/" + placemark.category + "/placemarks", placemark);
-      return response.status == 200;
+      placemarkStore.add(placemark);
     } catch (error) {
       return false;
     }
   },
 
-  async createCategory(category: Category, session: Session) {
+  async createCategory(category: Category) {
     try {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
-      const response = await axios.post(this.baseUrl + "/api/categories", category);
-      return response.status == 200;
+      categoryStore.add(category);
     } catch (error) {
       return false;
     }
   },
 
-  async getCategories(session: Session): Promise<Category[]> {
+  async getCategories(): Promise<Category[]> {
     try {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
-      const response = await axios.get(this.baseUrl + "/api/categories");
-      return response.data;
+      const categories = await categoryStore.find();
+      return JSON.parse(JSON.stringify(categories));
     } catch (error) {
       return [];
     }
   },
 
-  async getPlacemarks(session: Session): Promise<Placemark[]> {
+  async getPlacemarks(): Promise<Placemark[]> {
     try {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + session.token;
-      const response = await axios.get(this.baseUrl + "/api/placemarks");
-      return response.data;
+      const placemarks = await placemarkStore.find();
+      return JSON.parse(JSON.stringify(placemarks));
     } catch (error) {
       return [];
     }
-  }  
+  },
+
+  async getPlacemark(id: string): Promise<Placemark | null> {
+    try {
+      const placemark = await placemarkStore.findOne(id);
+      console.log("Placemark findOne", placemark);
+      return JSON.parse(JSON.stringify(placemark));
+    } catch (error) {
+      return null;
+    }
+  },
+
+  async getPlacemarksByCategory(id: string): Promise<Category[]> {
+    try {
+      const placemarks = await placemarkStore.findByCategory(id);
+      console.log("Placemarks", placemarks);
+      return JSON.parse(JSON.stringify(placemarks));
+    } catch (error) {
+      return [];
+    }
+  }, 
 };

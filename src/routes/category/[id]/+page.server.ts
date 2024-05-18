@@ -1,10 +1,10 @@
 import { placemarkService } from "$lib/services/placemark-service";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ params }) => {
   return {
-    placemarks: await placemarkService.getPlacemarks(),
-    categories: await placemarkService.getCategories()
+    categories: await placemarkService.getCategories(),
+    placemarks: await placemarkService.getPlacemarksByCategory(params.id)
   };
 };
 

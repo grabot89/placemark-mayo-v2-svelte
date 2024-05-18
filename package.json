@@ -1,80 +1,41 @@
 {
-  "name": "placemark-mayo",
-  "version": "0.2.0",
-  "description": "A Placemark application for the HDip in Computing, WIT full stack assignment",
-  "main": "src/server.js",
-  "type": "module",
+  "name": "placemark-svelte-v2",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
+    "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write .",
-    "dev": "vite dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/grabot89/placemark-mayo-v2-svelte"
-  },
-  "keywords": [
-    "node",
-    "hapi"
-  ],
-  "author": "grainne-moran",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wit-hdip-comp-sci-2021/playtime/issues"
-  },
-  "homepage": "https://github.com/grabot89/placemark-mayo-v2-svelte#readme",
-  "dependencies": {
-    "@hapi/boom": "^10.0.1",
-    "@hapi/cookie": "^12.0.1",
-    "@hapi/hapi": "^21.3.2",
-    "@hapi/inert": "^7.1.0",
-    "@hapi/vision": "^7.0.3",
-    "@sveltejs/adapter-auto": "^3.0.0",
-    "@sveltejs/kit": "^2.0.0",
-    "@sveltejs/vite-plugin-svelte": "^3.0.0",
-    "@types/eslint": "^8.56.0",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
-    "cloudinary": "^2.0.3",
-    "dotenv": "^16.4.1",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-svelte": "^2.35.1",
-    "handlebars": "^4.7.8",
-    "hapi-auth-jwt2": "^10.5.1",
-    "hapi-swagger": "^17.2.1",
-    "joi": "^17.12.0",
-    "jsonwebtoken": "^9.0.2",
-    "lowdb": "^7.0.1",
-    "mais-mongoose-seeder": "^1.0.7",
-    "mongoose": "^8.3.0",
-    "prettier": "^3.1.1",
-    "prettier-plugin-svelte": "^3.1.2",
-    "svelte": "^4.2.7",
-    "svelte-check": "^3.6.0",
-    "tslib": "^2.4.1",
-    "typescript": "^5.0.0",
-    "uuid": "^9.0.1",
-    "vite": "^5.0.3"
+    "format": "prettier --write ."
   },
   "devDependencies": {
-    "axios": "^1.6.8",
-    "chai": "^5.0.3",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb-base": "^15.0.0",
+    "@sveltejs/adapter-auto": "^3.2.0",
+    "@sveltejs/kit": "^2.5.5",
+    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@types/eslint": "^8.56.9",
+    "@types/leaflet": "^1.9.9",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-svelte": "^2.37.0",
     "leaflet": "^1.9.4",
-    "mocha": "^10.2.0",
-    "nodemon": "^3.0.3",
     "prettier": "^3.2.5",
-    "svelte-frappe-charts": "^1.10.0"
+    "prettier-plugin-svelte": "^3.2.2",
+    "svelte": "^4.2.13",
+    "svelte-check": "^3.6.9",
+    "svelte-frappe-charts": "^1.10.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8"
   },
-  "engines": {
-    "node": ">=16"
+  "type": "module",
+  "dependencies": {
+    "mais-mongoose-seeder": "^1.0.7",
+    "mongoose": "^8.3.1",
+    "svelte-cloudinary": "^1.3.2"
   }
 }

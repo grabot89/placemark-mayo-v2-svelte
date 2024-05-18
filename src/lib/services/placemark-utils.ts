@@ -33,7 +33,7 @@ export function generateByCategory(placemarks: Placemark[], categories: Category
 
   placemarksByCategory.labels = [];
     categories.forEach((category) => {
-      placemarksByCategory.labels.push(`${category.title}`);
+      placemarksByCategory.labels.push(`${category.name}`);
       placemarksByCategory.datasets[0].values.push(0);
   });
 

@@ -1,17 +1,38 @@
+# create-svelte
 
-# Place Mark Mayo
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-Welcome to Place Mark Mayo! This website offers you the ability to create and categorize places of interest in Co. Mayo, Ireland. Whether you're looking for beaches, churches, museums, walks, or trails, Place Mark Mayo is your go-to platform for discovering and sharing the hidden gems of Mayo.
+## Creating a project
 
-## Features
+If you're seeing this, you've probably already done this step. Congrats!
 
-- **Create Places:** Easily add new places to the database, providing details such as name, location, category, and description.
-- **Categorize Places:** Organize places into categories like beaches, churches, museums, walks, and trails for easy browsing and exploration.
-- **Explore Mayo:** Discover new places and attractions in Co. Mayo or share your favorite spots with others.
-- **HAPI Framework:** Built using the HAPI Framework, ensuring stability, security, and scalability.
-- **JOI Schemas:** Utilizes JOI schemas for data validation, ensuring accurate and consistent information.
+```bash
+# create a new project in the current directory
+npm create svelte@latest
 
-## Getting Started
+# create a new project in my-app
+npm create svelte@latest my-app
+```
 
-To start using Place Mark Mayo, simply visit our website and create an account. Once logged in, you can begin adding places, exploring existing ones, and contributing to the Mayo community.
+## Developing
 
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

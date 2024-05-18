@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Placemark } from "$lib/types/placemark-types";
 
-  export let placemarks: Placemark[];
+  export let placemark: Placemark;
 </script>
 
 <table class="table is-fullwidth">
@@ -13,11 +13,9 @@
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Temperature</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
-    {#each placemarks as placemark}
       <tr>
         <td>
           {placemark.name}
@@ -39,14 +37,6 @@
         <td>
           {placemark.temperature}
         </td>
-        <td>
-          <a href="/placemark/{placemark._id}" class="button">
-            <span class="icon">
-              <i class="fas fa-eye"></i>
-            </span>
-          </a>
-        </td>
       </tr>
-    {/each}
   </tbody>
 </table>

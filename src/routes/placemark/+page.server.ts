@@ -2,14 +2,11 @@ import { placemarkService } from "$lib/services/placemark-service";
 import type { Session } from "$lib/types/placemark-types";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ parent }) => {
-  const { session } = await parent();
-  if (session) {
-    return {
-      placemarks: await placemarkService.getPlacemarks(session!),
-      categoryList: await placemarkService.getCategories(session!)
-    };
-  }
+export const load: PageServerLoad = async () => {
+  return {
+    placemarks: await placemarkService.getPlacemarks(),
+    categories: await placemarkService.getCategories()
+  };
 };
 
 export const actions = {
@@ -27,9 +24,8 @@ export const actions = {
           longitude: form.get("longitude") as unknown as number,
           image: "",
           temperature: 0,
-          _id: ""
         };
-        placemarkService.createPlacemark(placemark, session);
+        placemarkService.createPlacemark(placemark);
       }
     }
   }

@@ -7,7 +7,7 @@
 
   export let id = "home-map-id";
   export let height = 80;
-  export let location = { lat: 53.88399130187888, lng: -9.207886178948524 };
+  export let location = { lat: 53.2734, lng: -7.7783203 };
   export let zoom = 8;
   export let minZoom = 7;
   export let activeLayer = "Terrain";

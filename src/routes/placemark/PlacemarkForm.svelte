@@ -1,10 +1,7 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-  import { placemarkService } from "$lib/services/placemark-service";
   import type { Category, Placemark } from "$lib/types/placemark-types";
-  import { currentSession, latestPlacemark } from "$lib/stores";
   import Coordinates from "$lib/ui/Coordinates.svelte";
-  import type { Category } from "$lib/types/placemark-types";
 
   export let categories: Category[] = [];
 
@@ -27,7 +24,7 @@
     <div class="select">
       <select name="category">
         {#each categories as category}
-          <option value={category._id}>{category.title}</option>
+          <option value={category._id}>{category.name}</option>
         {/each}
       </select>
     </div>

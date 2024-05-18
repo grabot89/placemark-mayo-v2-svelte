@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { subTitle, latestPlacemark } from "$lib/stores";
+  import { subTitle } from "$lib/stores";
   import Card from "$lib/ui/Card.svelte";
   import PlacemarkForm from "./PlacemarkForm.svelte";
   import type { Category } from "$lib/types/placemark-types";
 
   export let data: any;
-  subTitle.set("Create a placemark");
+  subTitle.set("View placemark");
 </script>
 
 <Card title="Create placemark">

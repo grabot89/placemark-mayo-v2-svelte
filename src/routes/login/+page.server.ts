@@ -1,5 +1,6 @@
 import { dev } from "$app/environment";
 import { placemarkService } from "$lib/services/placemark-service";
+import { currentSession } from "$lib/stores.js";
 import { redirect } from "@sveltejs/kit";
 
 export const actions = {
@@ -10,10 +11,11 @@ export const actions = {
     if (email === "" || password === "") {
       throw redirect(307, "/");
     } else {
-      console.log(`Attempting to log in email: ${email} with password: ${password}`);
+      console.log(`attempting to log in email: ${email} with password: ${password}`);
       const session = await placemarkService.login(email, password);
 
       if (session) {
+        currentSession.set(session);
         const userJson = JSON.stringify(session);
         cookies.set("placemark-user", userJson, {
           path: "/",
