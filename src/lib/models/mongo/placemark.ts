@@ -19,7 +19,9 @@ const placemarkSchema = new Schema<Placemark>({
     ref: "User"
   },
   latitude: String,
-  longitude: String
+  longitude: String,
+  temperature: Number,
+  images: [String],
 });
 
 export const PlacemarkMongoose = models["Placemark"] || model("Placemark", placemarkSchema);

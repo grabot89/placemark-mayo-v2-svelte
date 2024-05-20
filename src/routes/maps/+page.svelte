@@ -6,7 +6,8 @@
   import { onMount } from "svelte";
 
   export let data: any;
-  let map: LeafletMap;
+  let terrainMap: LeafletMap;
+  let satelliteMap: LeafletMap;
 
   subTitle.set("Placemark Locations");
 
@@ -15,15 +16,28 @@
     const placemarks = data.placemarks;
     placemarks.forEach((placemark: Placemark) => {
       if (typeof placemark.category !== "string") {
-        const popup = `${placemark.category.title}: ${placemark.name}`;
-        map.addMarker(placemark.latitude, placemark.longitude, popup);
+        const terrainPopup = `${placemark.category.name}: ${placemark.name}`;
+        terrainMap.addMarker(placemark.latitude, placemark.longitude, terrainPopup);
       }
     });
-    const lastPlacemark = placemarks[placemarks.length - 1];
-    if (lastPlacemark && map) map.moveTo(lastPlacemark.latitude, lastPlacemark.longitude);
+    const terrainlastPlacemark = placemarks[placemarks.length - 1];
+    if (terrainlastPlacemark && terrainMap) terrainMap.moveTo(terrainlastPlacemark.latitude, terrainlastPlacemark.longitude);
+
+
+    placemarks.forEach((placemark: Placemark) => {
+      if (typeof placemark.category !== "string") {
+        const satellitePopup = `${placemark.category.name}: ${placemark.name}`;
+        satelliteMap.addMarker(placemark.latitude, placemark.longitude, satellitePopup);
+      }
+    });
+    const satellitelastPlacemark = placemarks[placemarks.length - 1];
+    if (satellitelastPlacemark && satelliteMap) satelliteMap.moveTo(satellitelastPlacemark.latitude, satellitelastPlacemark.longitude);
   });
 </script>
 
-<Card title="Placemarks Locations">
-  <LeafletMap height={60} bind:this={map} />
+<Card title="Placemarks Terrain Locations">
+  <LeafletMap id="terrain-map" height={60} bind:this={terrainMap} activeLayer="Terrain" placemarks={data.placemarks} />
+</Card>
+<Card title="Placemarks Satellite Locations">
+  <LeafletMap id="satellite-map" height={60} bind:this={satelliteMap} activeLayer="Satellite" placemarks={data.placemarks} />
 </Card>

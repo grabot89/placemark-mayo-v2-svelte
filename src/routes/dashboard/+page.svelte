@@ -18,7 +18,7 @@
     const placemarks = data.placemarks;
     placemarks.forEach((placemark: Placemark) => {
       if (typeof placemark.category !== "string") {
-        const popup = `${placemark.category.title} ${placemark.name}`;
+        const popup = `${placemark.category.name} ${placemark.name}`;
         map.addMarker(placemark.latitude, placemark.longitude, popup);
       }
     });

@@ -10,7 +10,7 @@
   <div class="field-body">
     <div class="field">
       <p class="control is-expanded">
-        <input id="longitude" class="input" type="float" name="latitude" bind:value={latitude} />
+        <input id="latitude" class="input" type="number" name="latitude" bind:value={latitude} min="53.46618549741208" max="54.36227016318675" step="any" />
       </p>
     </div>
     <div class="field-label is-normal">
@@ -18,7 +18,7 @@
     </div>
     <div class="field">
       <p class="control is-expanded">
-        <input id="latitude" class="input" type="float" name="longitude" bind:value={longitude} />
+        <input id="longitude" class="input" type="number" name="longitude" bind:value={longitude} min="-10.275894721548646" max="-8.583578381749792" step="any" />
       </p>
     </div>
   </div>

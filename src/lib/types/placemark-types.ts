@@ -29,6 +29,7 @@ export interface Session {
     longitude: number;
     user: User | string;
     temperature: number;
+    images: string[];
     _id?: string;
   }
 

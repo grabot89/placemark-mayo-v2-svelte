@@ -8,9 +8,12 @@
   import { onMount } from "svelte";
   import { page } from '$app/stores';
 
+
   subTitle.set("View categories");
   export let data: any;
+  export let form;
   export let thisCategory: Category;
+  let message = "";
 
   onMount(async () => {
     const categories = data.categories;
@@ -18,6 +21,10 @@
   });
     
 </script>
+
+{#if form?.error}
+	<p class="error">{form.error}</p>
+{/if}
 
 
 <CategoryView category={ thisCategory }/>

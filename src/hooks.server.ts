@@ -1,9 +1,10 @@
-import { dbConnect, seed } from "$lib/models/db";
+import { dbConnect } from "$lib/models/db";
 import type { Handle } from "@sveltejs/kit";
 
 const initializeApp = async () => {
     await dbConnect();
-    await seed();
+    // Seeding not working
+    //await seed();
   };
   
   initializeApp().catch((error) => {

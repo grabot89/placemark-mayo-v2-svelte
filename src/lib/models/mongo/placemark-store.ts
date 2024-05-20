@@ -31,5 +31,17 @@ export const placemarkStore = {
 
   async delete() {
     await PlacemarkMongoose.deleteMany({});
-  }
+  },
+
+  async update(placemark: Placemark, updatedPlacemark: Placemark) {
+    const placemarkDoc = await PlacemarkMongoose.findOne({ _id: placemark._id });
+    placemarkDoc.name = updatedPlacemark.name;
+    placemarkDoc.category = updatedPlacemark.category;
+    placemarkDoc.description = updatedPlacemark.description;
+    placemarkDoc.user = updatedPlacemark.user;
+    placemarkDoc.latitude = updatedPlacemark.latitude;
+    placemarkDoc.longitude = updatedPlacemark.longitude;
+    placemarkDoc.temperature = updatedPlacemark.temperature;
+    await placemarkDoc.save();
+  },
 };

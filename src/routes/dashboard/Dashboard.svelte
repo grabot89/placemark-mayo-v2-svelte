@@ -17,11 +17,6 @@
                   <i class="fas fa-eye"></i>
                 </span>
               </a>
-              <a href="/dashboard/deletecategory/{category._id}" class="button">
-                <span class="icon">
-                  <i class="fas fa-trash"></i>
-                </span>
-              </a>
             </div>
           </div>
         </div>

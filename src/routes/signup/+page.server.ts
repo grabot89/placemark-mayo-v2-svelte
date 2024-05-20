@@ -2,23 +2,28 @@ import { dev } from "$app/environment";
 import { placemarkService } from "$lib/services/placemark-service";
 import { currentSession } from "$lib/stores.js";
 import { redirect } from "@sveltejs/kit";
+import { sanitizeInput } from "$lib/services/placemark-utils";
+import bcrypt from 'bcryptjs';
+
 
 export const actions = {
   signup: async ({ request, cookies }) => {
     const form = await request.formData();
-    const firstName = form.get("firstName") as string;
-    const lastName = form.get("lastName") as string;
-    const email = form.get("email") as string;
-    const password = form.get("password") as string;
+    const firstName = sanitizeInput(form.get("firstName") as string);
+    const lastName = sanitizeInput(form.get("lastName") as string);
+    const email = sanitizeInput(form.get("email") as string);
+    const password = sanitizeInput(form.get("password") as string);
     if (email === "" || password === "") {
       throw redirect(307, "/");
     } else {
       console.log(`attempting to signup user ${firstName} ${lastName} email: ${email} with password: ${password}`);
+
+      const hashedPassword = await bcrypt.hash(password, 10);
       const user = {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password,
+        password: hashedPassword,
         admin: false,
       };
       const attempt = await placemarkService.signup(user);

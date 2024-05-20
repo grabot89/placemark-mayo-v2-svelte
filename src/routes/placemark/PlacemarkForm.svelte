@@ -10,7 +10,9 @@
   let selectedCategory = "Museums";
   let latitude = 52.160858;
   let longitude = -7.15242;
+  let temperature = 10;
   let message = "Create a new placemark of interest!";
+  let form;
 
 </script>
 
@@ -32,6 +34,10 @@
   <div class="field">
     <label class="label" for="name">Enter Description:</label>
     <input class="input" id="description" name="description" type="text" />
+  </div>
+  <div class="field">
+    <label class="label" for="name">Enter Temperature:</label>
+    <input class="input" id="temperature" name="temperature" type="number" />
   </div>
   <Coordinates bind:latitude bind:longitude />
   <div class="field">

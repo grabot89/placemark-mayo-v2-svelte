@@ -1,25 +1,33 @@
-import type { Category, DataSet, Placemark } from "$lib/types/placemark-types";
+import type { Category, DataSet, Placemark, User } from "$lib/types/placemark-types";
 
-// export function generateByMethod(placemarkList: Placemark[]): DataSet {
-//   const totalByMethod: DataSet = {
-//     labels: ["paypal", "direct"],
-//     datasets: [
-//       {
-//         values: [0, 0]
-//       }
-//     ]
-//   };
+export function generateByUser(placemarks: Placemark[], users: User[]): DataSet {
+  const placemarksByUser: DataSet = {
+    labels: [],
+    datasets: [
+      {
+        values: [0, 0]
+      }
+    ]
+  };
 
-//   donationList.forEach((donation) => {
-//     if (donation.method == "paypal") {
-//       totalByMethod.datasets[0].values[0] += donation.amount;
-//     } else if (donation.method == "direct") {
-//       totalByMethod.datasets[0].values[1] += donation.amount;
-//     }
-//   });
+  placemarksByUser.labels = [];
+    users.forEach((user) => {
+      placemarksByUser.labels.push(`${user.firstName},${user.lastName}`);
+      placemarksByUser.datasets[0].values.push(0);
+  });
 
-//   return totalByMethod;
-// }
+  users.forEach((user, i) => {
+    placemarks.forEach((placemark) => {
+      if (typeof placemark.user !== "string") {
+        if (placemark.user._id == user._id) {
+          placemarksByUser.datasets[0].values[i]++;
+        }
+      }
+    });
+  });
+
+  return placemarksByUser;
+}
 
 export function generateByCategory(placemarks: Placemark[], categories: Category[]): DataSet {
   const placemarksByCategory: DataSet = {
@@ -41,11 +49,35 @@ export function generateByCategory(placemarks: Placemark[], categories: Category
     placemarks.forEach((placemark) => {
       if (typeof placemark.category !== "string") {
         if (placemark.category._id == category._id) {
-          placemarksByCategory.datasets[0].values[i] += placemark.temperature;
+          placemarksByCategory.datasets[0].values[i]++;
         }
       }
     });
   });
 
   return placemarksByCategory;
+}
+
+export function generateByTemperature(placemarks: Placemark[]): DataSet {
+  const placemarksByTemperature: DataSet = {
+    labels: [],
+    datasets: [
+      {
+        values: [0, 0]
+      }
+    ]
+  };
+
+  placemarks.forEach((placemark) => {
+    placemarksByTemperature.labels.push(placemark.name);
+    placemarksByTemperature.datasets[0].values.push(placemark.temperature);
+  });
+
+  return placemarksByTemperature;
+}
+
+export function sanitizeInput(input: string) {
+  // Sanitize inputs from form field text
+  const sanitizedInput = input.replace(/[^\w\s@._-]+/g, '');
+  return sanitizedInput;
 }

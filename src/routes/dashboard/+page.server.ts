@@ -2,6 +2,7 @@ import { placemarkService } from "$lib/services/placemark-service";
 import type { PageServerLoad } from "./$types";
 import type { Session } from "$lib/types/placemark-types";
 import { redirect } from "@sveltejs/kit";
+import { sanitizeInput } from "$lib/services/placemark-utils";
 
 export const load: PageServerLoad = async () => {
   return {
@@ -18,7 +19,7 @@ export const actions = {
       if (session) {
         const categories = await placemarkService.getCategories()
         const form = await request.formData();
-        const name = form.get("name") as string;
+        const name = sanitizeInput(form.get("name") as string);
         const existingCategory = categories.find((category) => category.name === name)
         if (name === "" || existingCategory) {
           throw redirect(500, "/dashboard");

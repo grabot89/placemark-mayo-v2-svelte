@@ -13,6 +13,7 @@
       <th>Latitude</th>
       <th>Longitude</th>
       <th>Temperature</th>
+      <th>Created By</th>
       <th></th>
     </tr>
   </thead>
@@ -38,6 +39,13 @@
         </td>
         <td>
           {placemark.temperature}
+        </td>
+        <td>
+          {#if typeof placemark.user !== "string"}
+            {placemark.user.firstName} {placemark.user.lastName}
+          {:else}
+            {placemark.user}
+          {/if}
         </td>
         <td>
           <a href="/placemark/{placemark._id}" class="button">
