@@ -34,6 +34,7 @@ export const placemarkStore = {
   },
 
   async update(placemark: Placemark, updatedPlacemark: Placemark) {
+    console.log("Place update", placemark);
     const placemarkDoc = await PlacemarkMongoose.findOne({ _id: placemark._id });
     placemarkDoc.name = updatedPlacemark.name;
     placemarkDoc.category = updatedPlacemark.category;
@@ -42,6 +43,7 @@ export const placemarkStore = {
     placemarkDoc.latitude = updatedPlacemark.latitude;
     placemarkDoc.longitude = updatedPlacemark.longitude;
     placemarkDoc.temperature = updatedPlacemark.temperature;
+    placemarkDoc.images = updatedPlacemark.images;
     await placemarkDoc.save();
   },
 };

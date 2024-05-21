@@ -112,6 +112,7 @@ export const placemarkService = {
   },
 
   async updatePlacemark(id: string, placemark: Placemark) {
+    console.log("Update is", id, placemark);
     try {
       const existingPlacemark = await placemarkStore.findOne(id);
       if (existingPlacemark !== null) {

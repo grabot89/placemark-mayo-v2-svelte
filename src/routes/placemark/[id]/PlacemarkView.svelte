@@ -1,18 +1,25 @@
 <script lang="ts">
   import type { Placemark } from "$lib/types/placemark-types";
-  import { CldUploadWidget } from 'svelte-cloudinary';
+  import { CldUploadWidget, CldImage } from 'svelte-cloudinary';
+  import Card from "$lib/ui/Card.svelte";
 
   export let placemark: Placemark;
-  export let CLOUD_NAME: string;
-
-  console.log("CLOUD_NAME", CLOUD_NAME);
 
   const handleSuccess = async (result) => {
-    console.log("Upload successful:", result);
-    placemark.images.push(imageUrl); // Add the image URL to the placemark's images array
+    placemark.images.push(result.info.url);
+    console.log("Placemark is", placemark);
     try {
-      await updateImage(placemark._id, placemark);
-      console.log('Placemark image updated successfully');
+      const response = await fetch(`/placemark/${placemark._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ placemark }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update placemark image');
+      }
     } catch (error) {
       console.error('Failed to update placemark image:', error);
     }
@@ -20,9 +27,6 @@
 
   const handleError = (error) => {
     console.error("Upload failed:", error);
-    const imageUrl = result.info.secure_url;
-    placemark.images.push(imageUrl);
-
   };
 </script>
 
@@ -63,11 +67,21 @@
   </tbody>
 </table>
 
-<CldUploadWidget
-  cloudName={CLOUD_NAME}
-  uploadPreset="placemark_preset"
-  folder="placemark_images"
-  tags={[`placemark_${placemark._id}`]}
-  onSuccess={handleSuccess}
-  onError={handleError}
-/>
+<Card title="Upload photos to placemark">
+  <CldUploadWidget uploadPreset="placemark_preset" let:open let:isLoading onSuccess={(result) => {handleSuccess(result)}}>
+	  <button class="button" on:click={open} disabled={isLoading}> Upload an Image </button>
+  </CldUploadWidget>
+</Card>
+
+<div class="columns is-multiline">
+{#each placemark.images as image}
+  <div class="column is-one-third">
+    <CldImage
+      width="600"
+      height="600"
+      src={image}
+      alt={placemark.description}
+    />
+  </div>
+{/each}
+</div>
